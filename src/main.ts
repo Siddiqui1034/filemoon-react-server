@@ -8,6 +8,9 @@ import express, { type Request, type Response } from "express";
 import cors from "cors";
 import morgan from "morgan";
 import mongoose from "mongoose";
+import userRouter from "./router/user.router.ts";
+import { multerConfig } from "./utils/multer.ts";
+import { createFile } from "./controller/file.controller.ts";
 
 dotenv.config();
 
@@ -20,13 +23,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(morgan("dev"));
 
-app.get("/", (req: Request, res: Response) => {
-  res.send(`
-    <h1>CodingOtt</h1>
-    <p>Website: <a href="https://www.codingott.com" target="_blank">www.codingott.com</a></p>
-    <p>YouTube: <a href="https://www.youtube.com/@codingott?sub_confirmation=1" target="_blank">YouTube Channel</a> — Learn AI/ML, Web Development, DevOps & more</p>
-  `);
-});
+// authentication apis
+app.use("/api/auth", userRouter);
+
+// file upload api
+const upload = multerConfig();
+app.post("/api/upload", upload.single("file"), createFile);
 
 app.use((req: Request, res: Response) => {
   res.status(404).json({ message: `${req.url} not found` });

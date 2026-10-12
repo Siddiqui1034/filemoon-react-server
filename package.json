@@ -2,6 +2,7 @@
   "name": "filemoon-server",
   "version": "1.0.0",
   "main": "dist/main.js",
+  "type": "module",
   "scripts": {
     "dev": "node --watch --experimental-strip-types src/main.ts",
     "build": "tsc",
@@ -12,18 +13,24 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "bcrypt": "^6.0.0",
     "chalk": "latest",
     "cors": "latest",
     "dotenv": "latest",
     "express": "latest",
     "inquirer": "latest",
+    "moment": "^2.31.0",
     "mongoose": "latest",
-    "morgan": "latest"
+    "morgan": "latest",
+    "multer": "^2.4.0",
+    "uuid": "^14.0.3"
   },
   "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
     "@types/cors": "latest",
     "@types/express": "latest",
     "@types/morgan": "latest",
+    "@types/multer": "^2.3.0",
     "@types/node": "latest",
     "typescript": "latest"
   }
