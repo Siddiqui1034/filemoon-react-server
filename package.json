@@ -23,6 +23,7 @@
     "mongoose": "latest",
     "morgan": "latest",
     "multer": "^2.4.0",
+    "nodemailer": "^10.1.0",
     "uuid": "^14.0.3"
   },
   "devDependencies": {

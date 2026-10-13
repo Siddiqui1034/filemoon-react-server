@@ -6,12 +6,12 @@ const root = process.cwd();
 
 export const multerConfig = () => {
   const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-      cb(null, path.join(root, "uploads"));
+    destination: (req, file, next) => {
+      next(null, path.join(root, "uploads"));
     },
-    filename: (req, file, cb) => {
+    filename: (req, file, next) => {
       const uniqueSuffix = `${uniqueId()}-${Date.now()}${path.extname(file.originalname)}`;
-      cb(null, uniqueSuffix);
+      next(null, uniqueSuffix);
     },
   });
 

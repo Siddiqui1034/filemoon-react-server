@@ -11,6 +11,7 @@ import mongoose from "mongoose";
 import userRouter from "./router/user.router.ts";
 import { multerConfig } from "./utils/multer.ts";
 import { createFile } from "./controller/file.controller.ts";
+import { sendEmail } from "./controller/share.controller.ts";
 
 dotenv.config();
 
@@ -28,7 +29,9 @@ app.use("/api/auth", userRouter);
 
 // file upload api
 const upload = multerConfig();
-app.post("/api/upload", upload.single("file"), createFile);
+app.post("/api/files", upload.single("file"), createFile);
+
+app.post("/api/send-email", sendEmail);
 
 app.use((req: Request, res: Response) => {
   res.status(404).json({ message: `${req.url} not found` });
